@@ -1,6 +1,7 @@
 import allure
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
+from config.urls import ORDER_FEED_URL
 
 
 @allure.feature("Лента заказов")
@@ -12,8 +13,9 @@ class TestOrderFeed:
         main.open_order_feed()
 
         feed = OrderFeedPage(driver)
-        before = feed.get_total_orders()
+        assert feed.current_url() == ORDER_FEED_URL  # проверяем URL
 
+        before = feed.get_total_orders()
         after = feed.get_total_orders()
 
         assert after >= before
@@ -24,6 +26,8 @@ class TestOrderFeed:
         main.open_order_feed()
 
         feed = OrderFeedPage(driver)
+        assert feed.current_url() == ORDER_FEED_URL  # проверяем URL
+
         before = feed.get_today_orders()
         after = feed.get_today_orders()
 
@@ -35,4 +39,6 @@ class TestOrderFeed:
         main.open_order_feed()
 
         feed = OrderFeedPage(driver)
+        assert feed.current_url() == ORDER_FEED_URL  # проверяем URL
+
         assert feed.orders_in_progress_visible()

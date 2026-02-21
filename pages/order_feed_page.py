@@ -2,7 +2,6 @@ import allure
 from pages.base_page import BasePage
 from locators.order_feed_locators import OrderFeedLocators
 
-
 class OrderFeedPage(BasePage):
 
     @allure.step("Получить количество выполненных заказов за всё время")
@@ -16,3 +15,7 @@ class OrderFeedPage(BasePage):
     @allure.step("Проверить наличие заказа в работе")
     def orders_in_progress_visible(self):
         return self.find(OrderFeedLocators.ORDERS_IN_PROGRESS).is_displayed()
+
+    @allure.step("Получить текущий URL")
+    def current_url(self):
+        return self.driver.current_url
